@@ -2,12 +2,17 @@ const express = require("express");
 const { apiRouter } = require("./routes");
 const { connectDB } = require("./config/db");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const {handleError} = require("./utils/error");
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
 const port = process.env.PORT;
 // console.log(process.env.PORT);
+app.use(cors({
+  origin:'http://localhost:5173',
+  credentials:true,
+}))
 connectDB();
 
 app.get('/', (req, res) => {
